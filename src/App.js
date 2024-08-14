@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import FrontPage from "./components/FrontPage";
+import Dashboard from "./components/Dashboard";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import "./css/App.css";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
+  useEffect(() => {
+    if (isAuthenticated && window.location.pathname === "/") {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<FrontPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
 }
 
