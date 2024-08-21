@@ -99,6 +99,7 @@ export default function ChatTab() {
           </Box>
         ))}
         <div ref={messagesEndRef} />
+        {doc && null}
       </Box>
 
       <Box sx={{ borderTop: "1px solid #ddd", p: 1 }}>
