@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Route, Routes } from "react-router-dom";
 import FrontPage from "./components/FrontPage";
 import ServerBrowser from "./components/ServerBrowser";
 import ProfileTab from "./components/ProfileTab";
