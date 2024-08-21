@@ -5,13 +5,24 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { signInWithGoogle } from "../auth";
+import { useNavigate } from "react-router-dom";
 import "../css/FrontPage.css";
 
 export default function FrontPage() {
-  const handleJoinNowClick = async () => {
-    const result = await signInWithGoogle();
+  const navigate = useNavigate();
 
-    console.log(result);
+  const handleJoinNowClick = async () => {
+    try {
+      const result = await signInWithGoogle();
+
+      if (result && result.user) {
+        navigate("/launchpad");
+      } else {
+        console.error("Authentication failed");
+      }
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+    }
   };
 
   return (
@@ -42,7 +53,7 @@ export default function FrontPage() {
           </Typography>
         </Box>
         <Box className="video-embed">
-          <iframe src="https://www.youtube.com/embed/CqXjp1vtNwk" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="EduTools Introduction" />
+          <iframe src="https://www.youtube.com/embed/BZNq7-WcEzw" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="EduTools Introduction" />
         </Box>
         <Button variant="contained" color="primary" className="join-now-button" onClick={handleJoinNowClick}>
           Don't Hesitate, Join Now.
