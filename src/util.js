@@ -28,6 +28,7 @@ export async function checkPaymentStatus() {
 }
 
 export async function updatePaymentStatus(userId, status) {
+  console.log("getting here 1");
   const db = getFirestore();
   const userRef = doc(db, "users", userId);
 
@@ -36,5 +37,17 @@ export async function updatePaymentStatus(userId, status) {
     console.log("Payment status updated successfully");
   } catch (error) {
     console.error("Error updating payment status:", error);
+  }
+}
+
+export async function deleteUserAccount(userId) {
+  const db = getFirestore();
+  const userRef = doc(db, "users", userId);
+
+  try {
+    await setDoc(userRef, { deleted: true }, { merge: true });
+    console.log("User account deleted successfully");
+  } catch (error) {
+    console.error("Error deleting user account:", error);
   }
 }

@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { signInWithGoogle } from "../auth";
 import { useNavigate } from "react-router-dom";
+import LoginIcon from "@mui/icons-material/Login";
 import "../css/FrontPage.css";
 
 export default function FrontPage() {
@@ -34,13 +35,65 @@ export default function FrontPage() {
             EduTools
           </Typography>
           <Box>
-            <Button variant="contained" color="primary" className="custom-button" onClick={handleJoinNowClick}>
+            <Button startIcon={<LoginIcon />} variant="contained" color="primary" className="custom-button" onClick={handleJoinNowClick} sx={{ marginRight: 1 }}>
               Join Now
             </Button>
           </Box>
         </Toolbar>
       </AppBar>
       <Box className="hero-section">
+        <div class="background">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         <Box className="hero-text">
           <Box className="hero-title-wrapper">
             <img src="/128.png" alt="Logo" className="hero-logo" />
@@ -48,15 +101,15 @@ export default function FrontPage() {
               EDUTOOLS
             </Typography>
           </Box>
-          <Typography variant="h5" component="div" className="hero-slogan" sx={{ fontFamily: "Mulish, sans-serif", fontWeight: 400, marginTop: 2 }}>
-            The Most Resourceful Education Community
+          <Typography variant="h5" component="div" className="hero-slogan" sx={{ fontFamily: "Mulish, sans-serif", fontWeight: 400, marginTop: 1 }}>
+            All Your Educational Tools in One Hub
           </Typography>
         </Box>
         <Box className="video-embed">
-          <iframe src="https://www.youtube.com/embed/BZNq7-WcEzw" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="EduTools Introduction" />
+          <iframe src="https://www.youtube.com/embed/BZNq7-WcEzw?autoplay=1&loop=1&rel=0&showinfo=0&color=white&iv_load_policy=3&playlist=BZNq7-WcEzw" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen title="EduTools Introduction" />
         </Box>
         <Button variant="contained" color="primary" className="join-now-button" onClick={handleJoinNowClick}>
-          Don't Hesitate, Join Now.
+          Take the Next Step, Join Us Today!
         </Button>
       </Box>
       <Box className="service-section">
@@ -64,25 +117,24 @@ export default function FrontPage() {
           Your Path to Success
         </Typography>
         <Typography variant="h6" component="div" className="service-subtitle">
-          Find out how we can help you become a straight A student.
+          Discover how EduTools can help you become a straight-A student.
         </Typography>
         <Box className="package-container">
           <Typography variant="h4" component="div" className="package-title">
             What We Offer
           </Typography>
           <ul className="package-list">
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Sed do eiusmod tempor incididunt</li>
-            <li>Ut labore et dolore magna aliqua</li>
-            <li>Quis ipsum suspendisse ultrices</li>
-            <li>Gravida dictum fusce ut placerat</li>
+            <li>Access to Exclusive Premium Educational Resources to Elevate Your Learning</li>
+            <li>Round-the-Clock Support from Expert Tutors and Mentors, Anytime You Need It</li>
+            <li>Join a Thriving Student Community Dedicated to Academic Excellence</li>
+            <li>Engage in Active Discussions with Peers through Our Public Chat Platform</li>
           </ul>
           <Button variant="contained" color="primary" className="upgrade-button" onClick={handleJoinNowClick}>
             UPGRADE NOW
           </Button>
         </Box>
       </Box>
+
       <Box className="results-section">
         <Typography variant="h3" component="div" className="results-title">
           Countless Student Results
@@ -93,47 +145,48 @@ export default function FrontPage() {
         <Box className="reviews-grid">
           <Box className="review">
             <Box className="stars">★★★★★</Box>
-            "EduTools helped me achieve straight A's!"
+            "EduTools helped me turn my grades around in calculus. I went from struggling to an A-."
             <Typography variant="body2" className="reviewer">
-              John Doe, Harvard University
+              Ethan Martinez, University of Texas at Austin, Sophomore
             </Typography>
           </Box>
           <Box className="review">
             <Box className="stars">★★★★★</Box>
-            "The best decision I made this year."
+            "The daily planner and peer sessions have been a game-changer for managing my workload."
             <Typography variant="body2" className="reviewer">
-              Jane Smith, Stanford University
+              Priya Patel, University of Florida, Junior
             </Typography>
           </Box>
           <Box className="review">
             <Box className="stars">★★★★★</Box>
-            "A game changer for my academic life."
+            "EduTools helped me stay on top of my engineering projects and meet deadlines."
             <Typography variant="body2" className="reviewer">
-              Mike Johnson, MIT
+              Michael Zhang, Purdue University, Mechanical Engineering Major
             </Typography>
           </Box>
           <Box className="review">
             <Box className="stars">★★★★★</Box>
-            "I went from struggling to thriving!"
+            "I went from feeling overwhelmed to getting solid B's with EduTools."
             <Typography variant="body2" className="reviewer">
-              Emily Davis, UC Berkeley
+              Aisha Williams, San Diego State University, Sophomore
             </Typography>
           </Box>
           <Box className="review">
             <Box className="stars">★★★★★</Box>
-            "Their support system is unmatched."
+            "The personalized study plans helped me balance pre-med studies and extracurriculars."
             <Typography variant="body2" className="reviewer">
-              Sarah Brown, Yale University
+              Sofia Hernandez, University of Arizona, Pre-Med
             </Typography>
           </Box>
           <Box className="review">
             <Box className="stars">★★★★★</Box>
-            "I now feel confident in my studies."
+            "EduTools' mock tests and guides gave me the confidence to improve my grades."
             <Typography variant="body2" className="reviewer">
-              Chris Lee, Princeton University
+              David Kim, Ohio State University, Economics Major
             </Typography>
           </Box>
         </Box>
+
         <Typography variant="h6" component="div" className="quote-section">
           “Many students who were unsure about joining us quickly realize the
           <strong> incredible support and value</strong> we offer. Our
@@ -152,7 +205,7 @@ export default function FrontPage() {
       </Box>
 
       <Box className="footer">
-        <Typography variant="body1">© 2093 EduTools. All rights reserved.</Typography>
+        <Typography variant="body1">© 2024 EduTools. All rights reserved.</Typography>
       </Box>
     </>
   );

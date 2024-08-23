@@ -10,8 +10,14 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ChatIcon from "@mui/icons-material/Chat";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import { Avatar, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import "../css/Dashboard.css";
@@ -73,11 +79,13 @@ export default function DashboardLayout({ children }) {
         <Box sx={{ overflow: "auto" }}>
           <List>
             {[
-              { text: "Launchpad", path: "/launchpad" },
-              { text: "Profile", path: "/profile" },
-              { text: "Chat", path: "/chat" },
+              { text: "Launchpad", path: "/launchpad", icon: <DashboardIcon /> },
+              { text: "Profile", path: "/profile", icon: <AccountCircleIcon /> },
+              { text: "Chat", path: "/chat", icon: <ChatIcon /> },
+              { text: "Resource Library", path: "/resources", icon: <LibraryBooksIcon /> },
             ].map((item) => (
               <ListItem button key={item.text} onClick={() => handleTabClick(item.path)}>
+                <ListItemIcon sx={{ minWidth: 40 }}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItem>
             ))}
@@ -89,7 +97,7 @@ export default function DashboardLayout({ children }) {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 0,
           marginLeft: !isMobile && isDrawerOpen ? 0 : 0,
           transition: "margin-left 0.3s ease",
         }}
@@ -103,7 +111,7 @@ export default function DashboardLayout({ children }) {
               Welcome{user ? ", " : ""} {user ? user.displayName : ""}
             </Typography>
             {user && <Avatar src={user.photoURL} alt={user.displayName} sx={{ marginLeft: "auto", mr: 2 }} />}
-            <Button variant="outlined" color="inherit" onClick={handleLogout}>
+            <Button variant="outlined" color="inherit" onClick={handleLogout} startIcon={<LogoutIcon />}>
               Logout
             </Button>
           </Toolbar>
