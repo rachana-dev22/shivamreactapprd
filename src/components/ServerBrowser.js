@@ -47,7 +47,7 @@ export default function ServerBrowser() {
           enable_sharing: true,
         });
 
-        const { share_id, kasm_url, status } = requestResponse.data;
+        const { share_id, status } = requestResponse.data;
 
         if (status !== "running") {
           await waitForSessionToRun(share_id);

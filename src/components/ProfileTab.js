@@ -63,10 +63,6 @@ export default function ProfileTab() {
     setOpenConfirmDialog(false);
   };
 
-  const handleOpenConfirmDialog = () => {
-    setOpenConfirmDialog(true);
-  };
-
   const handleCloseConfirmDialog = () => {
     setOpenConfirmDialog(false);
   };

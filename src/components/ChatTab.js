@@ -88,7 +88,6 @@ export default function ChatTab() {
           const isLastInGroup = nextMsg && (msg.userId !== nextMsg.userId || (nextMsg.timestamp && msg.timestamp && nextMsg.timestamp.toMillis() - msg.timestamp.toMillis() > 5 * 60 * 1000));
 
           const showAvatarAndName = !(isSameUser && isWithinTimeLimit);
-          const isAnonymous = !msg.avatar && msg.displayName === "Anonymous";
 
           return (
             <Box
