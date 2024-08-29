@@ -12,11 +12,12 @@ export default function ServerBrowser() {
   const apiKey = "8jbC15BddAAx";
   const apiKeySecret = "mGb0o74t2S7PR8RhsHFAMgwAmkB3N2X5";
   const userID = "8affcdbc16fc4910acb8a6dc268cd7ed";
+  const workerUrl = "https://main-worker.educationaltools-io.workers.dev";
 
   useEffect(() => {
     const fetchServers = async () => {
       try {
-        const response = await axios.post("https://52.14.144.0/api/public/get_kasms", {
+        const response = await axios.post(`${workerUrl}/api/public/get_kasms`, {
           api_key: apiKey,
           api_key_secret: apiKeySecret,
           user_id: userID,
@@ -39,7 +40,7 @@ export default function ServerBrowser() {
     const availableServer = servers.find((server) => server.server.status === "free");
     if (availableServer) {
       try {
-        const requestResponse = await axios.post("https://52.14.144.0/api/public/request_kasm", {
+        const requestResponse = await axios.post(`${workerUrl}/api/public/request_kasm`, {
           api_key: apiKey,
           api_key_secret: apiKeySecret,
           user_id: userID,
@@ -53,7 +54,7 @@ export default function ServerBrowser() {
           await waitForSessionToRun(share_id);
         }
 
-        const joinResponse = await axios.post("https://52.14.144.0/api/public/join_kasm", {
+        const joinResponse = await axios.post(`${workerUrl}/api/public/join_kasm`, {
           api_key: apiKey,
           api_key_secret: apiKeySecret,
           user_id: userID,
@@ -77,7 +78,7 @@ export default function ServerBrowser() {
     let status = "starting";
     while (status !== "running") {
       try {
-        const statusResponse = await axios.post("https://52.14.144.0/api/public/get_kasm_status", {
+        const statusResponse = await axios.post(`${workerUrl}/api/public/get_kasm_status`, {
           api_key: apiKey,
           api_key_secret: apiKeySecret,
           share_id: share_id,
