@@ -198,7 +198,7 @@ export default function FrontPage() {
               overflow: "hidden",
             }}
           >
-            <iframe src="https://www.youtube.com/embed/BZNq7-WcEzw?autoplay=1&loop=1&rel=0&showinfo=0&color=white&iv_load_policy=3&playlist=BZNq7-WcEzw" style={{ width: "100%", height: "100%", border: "none" }} allowFullScreen />
+            <iframe title="Welcome to EduTools" src="https://www.youtube.com/embed/BZNq7-WcEzw?autoplay=1&loop=1&rel=0&showinfo=0&color=white&iv_load_policy=3&playlist=BZNq7-WcEzw" style={{ width: "100%", height: "100%", border: "none" }} allowFullScreen />
           </Box>
           <Button
             variant="contained"
