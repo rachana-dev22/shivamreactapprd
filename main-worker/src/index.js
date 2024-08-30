@@ -5,7 +5,7 @@ addEventListener("fetch", (event) => {
 async function handleRequest(request) {
   const url = new URL(request.url);
 
-  // Modify the request URL to point to your IP address
+  // Modify the request URL to point to your subdomain instead of the IP address
   const targetUrl = `https://kasm.edutools.app${url.pathname}`;
 
   if (request.method === "OPTIONS") {
@@ -13,7 +13,7 @@ async function handleRequest(request) {
   }
 
   try {
-    // Forward the request to the target IP address
+    // Forward the request to the target subdomain with HTTPS
     const response = await fetch(targetUrl, {
       method: request.method,
       headers: request.headers,

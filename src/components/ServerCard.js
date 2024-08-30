@@ -28,6 +28,8 @@ export default function ServerCard({ name, location, status }) {
         border: "1px solid #ddd",
         borderRadius: 2,
         mb: 0.2,
+        boxShadow: "inset 0 0px 5px rgba(0, 0, 0, 0.1)",
+        background: "linear-gradient(to bottom, white, #fefefe)",
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>

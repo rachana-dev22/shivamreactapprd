@@ -28,38 +28,10 @@ export default function FrontPage() {
 
   return (
     <>
-      <AppBar
-        sx={{
-          backgroundColor: "rgba(255, 255, 255, 0.7)",
-          borderBottom: "0px solid #e0e0e0",
-          padding: "0 1vh",
-          backdropFilter: "blur(10px)",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1100,
-        }}
-      >
-        <Toolbar
-          sx={{
-            maxWidth: "1200px",
-            width: "100%",
-            margin: "0 auto",
-            padding: { xs: "0 2vh", sm: "0 2vh" },
-          }}
-        >
+      <AppBar sx={{ backgroundColor: "rgba(255, 255, 255, 0.7)", borderBottom: "0px solid #e0e0e0", padding: "0 1vh", backdropFilter: "blur(10px)", position: "fixed", top: 0, left: 0, right: 0, zIndex: 1100 }}>
+        <Toolbar>
           <img src="/128.png" alt="Logo" style={{ width: 37, height: 37, marginRight: 8 }} />
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              color: "#000000",
-              fontFamily: "Radio Canada Big, sans-serif",
-              fontWeight: 550,
-            }}
-          >
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1, color: "#000000", fontFamily: "Radio Canada Big, sans-serif", fontWeight: 550 }}>
             EduTools
           </Typography>
           <Box>
@@ -77,8 +49,8 @@ export default function FrontPage() {
                 fontSize: "1rem",
                 boxShadow: "inset 0 0px 10px 0 rgba(0, 0, 0, 0.3), 0 4px 14px 0 rgba(0,118,255,0.39)",
                 border: "2px solid #3388ff",
-                marginRight: 5,
-                marginLeft: 2,
+                marginRight: 1,
+                marginLeft: 1,
                 transition: "all 0.3s ease",
                 "&:hover": {
                   boxShadow: "inset 0 0px 10px 0 rgba(255, 255, 255, 0.3), 0 6px 20px rgba(0,118,255,0.23)",
@@ -516,6 +488,10 @@ export default function FrontPage() {
             fontSize: "1.5rem",
             boxShadow: "inset 0 0px 10px 0 rgba(0, 0, 0, 0.3), 0 4px 14px 0 rgba(0,118,255,0.39)",
             border: "2px solid #3388ff",
+            "@media (max-width: 600px)": {
+              fontSize: "1.2rem",
+              padding: "12px 30px",
+            },
             "&:hover": {
               boxShadow: "inset 0 0px 10px 0 rgba(255, 255, 255, 0.3), 0 6px 20px rgba(0,118,255,0.23)",
               backgroundColor: "#0061f2",
