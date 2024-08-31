@@ -146,21 +146,20 @@
 // }
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import ServerCard from "./ServerCard";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import ServerCard from "./ServerCard";
 
 export default function ServerBrowser() {
   const [servers, setServers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const apiKey = "8jbC15BddAAx";
-  const apiKeySecret = "mGb0o74t2S7PR8RhsHFAMgwAmkB3N2X5";
-  const userID = "8affcdbc16fc4910acb8a6dc268cd7ed";
-  const workerUrl = "https://main-worker.educationaltools-io.workers.dev";
+  // const apiKey = "8jbC15BddAAx";
+  // const apiKeySecret = "mGb0o74t2S7PR8RhsHFAMgwAmkB3N2X5";
+  // const userID = "8affcdbc16fc4910acb8a6dc268cd7ed";
+  // const workerUrl = "https://main-worker.educationaltools-io.workers.dev";
 
   useEffect(() => {
     // Mock data
@@ -208,28 +207,29 @@ export default function ServerBrowser() {
       }
     } else {
       alert("No available servers at the moment.");
+      alert(error);
     }
   };
 
-  const waitForSessionToRun = async (share_id) => {
-    let status = "starting";
-    while (status !== "running") {
-      try {
-        // const statusResponse = await axios.fetch(`${workerUrl}/api/public/get_kasm_status`, {
-        //   api_key: apiKey,
-        //   api_key_secret: apiKeySecret,
-        //   share_id: share_id,
-        // });
-        // status = statusResponse.data.status;
-        if (status !== "running") {
-          await new Promise((resolve) => setTimeout(resolve, 5000));
-        }
-      } catch (error) {
-        console.error("Error while checking Kasm session status:", error);
-        break;
-      }
-    }
-  };
+  // const waitForSessionToRun = async (share_id) => {
+  //   let status = "starting";
+  //   while (status !== "running") {
+  //     try {
+  //       // const statusResponse = await axios.fetch(`${workerUrl}/api/public/get_kasm_status`, {
+  //       //   api_key: apiKey,
+  //       //   api_key_secret: apiKeySecret,
+  //       //   share_id: share_id,
+  //       // });
+  //       // status = statusResponse.data.status;
+  //       if (status !== "running") {
+  //         await new Promise((resolve) => setTimeout(resolve, 5000));
+  //       }
+  //     } catch (error) {
+  //       console.error("Error while checking Kasm session status:", error);
+  //       break;
+  //     }
+  //   }
+  // };
 
   return (
     <Box sx={{ p: 3, boxShadow: "inset 0 0px 10px rgba(0, 0, 0, 0.1)" }}>
