@@ -39,7 +39,7 @@ export default function ProfileTab() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        priceId: "price_1PthzPCKDtg3cmb0d95HhTLc",
+        priceId: "price_1OnCBhCKDtg3cmb0s1CLHaXC",
         email: user.email,
       }),
     });
