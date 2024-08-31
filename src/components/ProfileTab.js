@@ -1,10 +1,10 @@
-/* global Paddle */
-
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Avatar } from "@mui/material";
 import { getAuth } from "firebase/auth";
 import { checkPaymentStatus, updatePaymentStatus, deleteUserAccount } from "../util";
+import { loadStripe } from "@stripe/stripe-js";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+const stripePromise = loadStripe("pk_live_51OgZZ7CKDtg3cmb0LB9IdEhmcbQ3qmeaNodJojIBtMrxdvLtTa4jlbkRREU0VMC3gx5tpfL8ZgCLsqvJCnDN1igS00HEnnFrEA");
 
 export default function ProfileTab() {
   const auth = getAuth();
@@ -23,20 +23,6 @@ export default function ProfileTab() {
   };
 
   useEffect(() => {
-    Paddle.Environment.set("sandbox");
-    Paddle.Initialize({
-      token: "test_f75b2af9393af9ae3b2250cafad",
-      eventCallback: function (data) {
-        console.log(data);
-        if (data.name === "checkout.completed") {
-          updatePaymentStatus(user.uid, "paid");
-          setPaymentStatus("paid");
-        }
-      },
-    });
-  });
-
-  useEffect(() => {
     async function fetchPaymentStatus() {
       const status = await checkPaymentStatus();
       setPaymentStatus(status);
@@ -45,16 +31,28 @@ export default function ProfileTab() {
     fetchPaymentStatus();
   }, []);
 
-  const handleUpgradeSubscription = () => {
-    if (!user) {
-      console.error("User not authenticated");
-      return;
-    }
-
-    Paddle.Checkout.open({
-      items: [{ priceId: "pri_01j5p1e61nyhcd8j85t07f825y", quantity: 1 }],
-      customer: { email: user.email },
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+    const response = await fetch("https://stripe-worker.educationaltools-io.workers.dev/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        priceId: "price_1PthzPCKDtg3cmb0d95HhTLc",
+        email: user.email,
+      }),
     });
+
+    const session = await response.json();
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      console.error(result.error.message);
+    }
   };
 
   const handleCancelSubscription = async () => {
@@ -220,6 +218,7 @@ export default function ProfileTab() {
               variant="contained"
               color="primary"
               startIcon={<RocketLaunchIcon />}
+              onClick={handleCheckout}
               sx={{
                 mt: 2,
                 padding: "8px 35px",
@@ -237,7 +236,6 @@ export default function ProfileTab() {
                   boxShadow: "0 0 10px rgba(0, 0, 255, 0.8)",
                 },
               }}
-              onClick={handleUpgradeSubscription}
             >
               Purchase EduTools
             </Button>
