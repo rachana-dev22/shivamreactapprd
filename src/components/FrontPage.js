@@ -8,6 +8,7 @@ import { signInWithGoogle } from "../auth";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import TrustedByStudents from "./TrustedByStudents";
 
 export default function FrontPage() {
   const navigate = useNavigate();
@@ -338,7 +339,8 @@ export default function FrontPage() {
             fontFamily: "Mulish, sans-serif",
           }}
         >
-          Take a quick look at how we’ve been able to help others.
+          Trusted by students from top universities worldwide.
+          <TrustedByStudents />
         </Typography>
         <Box
           sx={{
@@ -428,8 +430,6 @@ export default function FrontPage() {
               Michael Zhang, Purdue University, Mechanical Engineering Major
             </Typography>
           </Box>
-          {/* Other reviews hidden for smaller screens */}
-          {/* Additional Reviews */}
         </Box>
 
         <Typography
