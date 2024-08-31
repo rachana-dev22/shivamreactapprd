@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
@@ -9,46 +9,31 @@ import { updatePaymentStatus } from "../util";
 
 export default function Success() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [showConfetti, setShowConfetti] = useState(true);
   const { width, height } = useWindowSize();
   const auth = getAuth();
   const user = auth.currentUser;
 
   useEffect(() => {
-    const verifySessionAndUpdateStatus = async () => {
-      const params = new URLSearchParams(location.search);
-      const sessionId = params.get("session_id");
-
-      if (!sessionId || !user) {
-        navigate("/failure"); // Redirect to failure page if session_id is missing or user is not authenticated
-        return;
-      }
-
-      try {
-        const response = await fetch(`/verify-session?session_id=${sessionId}`);
-        const data = await response.json();
-
-        if (data.isValid) {
+    const updateStatus = async () => {
+      if (user) {
+        try {
           await updatePaymentStatus(user.uid, "paid");
           console.log("Payment status updated to 'paid'");
-        } else {
-          navigate("/failure");
+        } catch (error) {
+          console.error("Error updating payment status:", error);
         }
-      } catch (error) {
-        console.error("Error verifying session or updating payment status:", error);
-        navigate("/failure");
       }
     };
 
-    verifySessionAndUpdateStatus();
+    updateStatus();
 
     const timer = setTimeout(() => {
       setShowConfetti(false);
-    }, 10000); // Adjusted the confetti duration to 10 seconds
+    }, 100000);
 
     return () => clearTimeout(timer);
-  }, [location, navigate, user]);
+  }, [user]);
 
   return (
     <Box

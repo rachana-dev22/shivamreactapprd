@@ -15,7 +15,6 @@ async function handleRequest(request) {
 
   if (request.method === "POST" && request.url.endsWith("/create-checkout-session")) {
     const { priceId, email } = await request.json();
-    const sessionId = generateUniqueSessionId();
 
     try {
       const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
@@ -30,7 +29,7 @@ async function handleRequest(request) {
           "line_items[0][price]": priceId,
           "line_items[0][quantity]": "1",
           customer_email: email,
-          success_url: `https://edutools.app/success?session_id=${sessionId}`,
+          success_url: "https://edutools.app/success",
           cancel_url: "https://edutools.app/failure",
         }),
       });
@@ -47,8 +46,6 @@ async function handleRequest(request) {
           },
         });
       }
-
-      await storeSessionInDatabase(sessionId, email, "pending");
 
       return new Response(JSON.stringify({ id: session.id }), {
         headers: {
@@ -69,12 +66,4 @@ async function handleRequest(request) {
   } else {
     return new Response("Not Found", { status: 404, headers: { "Access-Control-Allow-Origin": "*" } });
   }
-}
-
-function generateUniqueSessionId() {
-  return Math.random().toString(36).substr(2, 9);
-}
-
-async function storeSessionInDatabase(sessionId, email, status) {
-  await MY_KV_NAMESPACE.put(sessionId, JSON.stringify({ email, status }));
 }
