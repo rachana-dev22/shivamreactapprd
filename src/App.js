@@ -28,8 +28,8 @@ import PresentationTemplates from "./components/categories/PresentationTemplates
 import CaseStudies from "./components/categories/CaseStudies";
 import GroupStudyResources from "./components/categories/GroupStudyResources";
 import LanguageLearningResources from "./components/categories/LanguageLearningResources";
-import Success from "./components/success";
-import Failure from "./components/failure";
+import Success from "./components/Success";
+import Failure from "./components/Failure";
 
 import "./css/App.css";
 
