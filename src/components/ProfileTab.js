@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { checkPaymentStatus, updatePaymentStatus, deleteUserAccount } from "../util";
 import { loadStripe } from "@stripe/stripe-js";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-const stripePromise = loadStripe("pk_live_51OgZZ7CKDtg3cmb0LB9IdEhmcbQ3qmeaNodJojIBtMrxdvLtTa4jlbkRREU0VMC3gx5tpfL8ZgCLsqvJCnDN1igS00HEnnFrEA");
+const stripePromise = loadStripe("pk_test_51OgZZ7CKDtg3cmb0lr1Ftsq3crlehFW3culboDDrJqIPD6tFDnyVQrhTLmX6RWb73HOyMNe6l2HTIxlWRKPqjJ4Z00TSji7pQD");
 
 export default function ProfileTab() {
   const auth = getAuth();

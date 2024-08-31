@@ -3,16 +3,25 @@ addEventListener("fetch", (event) => {
 });
 
 async function handleRequest(request) {
+  if (request.method === "OPTIONS") {
+    // Handle CORS preflight request
+    return new Response(null, {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
+  }
+
   if (request.method === "POST" && request.url.endsWith("/create-checkout-session")) {
     const { priceId, email } = await request.json();
-
-    const stripeSecretKey = STRIPE_SECRET_KEY;
 
     try {
       const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${stripeSecretKey}`,
+          Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
@@ -29,15 +38,21 @@ async function handleRequest(request) {
       const session = await response.json();
 
       return new Response(JSON.stringify({ id: session.id }), {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
       });
     } catch (error) {
       return new Response(JSON.stringify({ error: error.message }), {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
       });
     }
   } else {
-    return new Response("Not Found", { status: 404 });
+    return new Response("Not Found", { status: 404, headers: { "Access-Control-Allow-Origin": "*" } });
   }
 }
