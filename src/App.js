@@ -28,6 +28,9 @@ import PresentationTemplates from "./components/categories/PresentationTemplates
 import CaseStudies from "./components/categories/CaseStudies";
 import GroupStudyResources from "./components/categories/GroupStudyResources";
 import LanguageLearningResources from "./components/categories/LanguageLearningResources";
+import Success from "./components/success";
+import Failure from "./components/failure";
+
 import "./css/App.css";
 
 function App() {
@@ -46,6 +49,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<FrontPage />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/failure" element={<Failure />} />
         <Route path="*" element={<NotFound />} />
         {isAuthenticated && (
           <>

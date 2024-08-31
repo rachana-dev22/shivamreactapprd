@@ -4,7 +4,6 @@ addEventListener("fetch", (event) => {
 
 async function handleRequest(request) {
   if (request.method === "OPTIONS") {
-    // Handle CORS preflight request
     return new Response(null, {
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -31,11 +30,22 @@ async function handleRequest(request) {
           "line_items[0][quantity]": "1",
           customer_email: email,
           success_url: "https://edutools.app/success",
-          cancel_url: "https://edutools.app/cancel",
+          cancel_url: "https://edutools.app/failure",
         }),
       });
 
       const session = await response.json();
+
+      if (!response.ok) {
+        console.error("Stripe API error:", session);
+        return new Response(JSON.stringify({ error: session.error.message }), {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+      }
 
       return new Response(JSON.stringify({ id: session.id }), {
         headers: {
@@ -44,6 +54,7 @@ async function handleRequest(request) {
         },
       });
     } catch (error) {
+      console.error("Fetch error:", error);
       return new Response(JSON.stringify({ error: error.message }), {
         status: 500,
         headers: {

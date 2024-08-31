@@ -3,5 +3,5 @@ main = "src/index.js"
 account_id = "48c7b907c2e53e104dd054dbe13521c8"
 compatibility_date = "2024-08-30"
 
-[env.production]
-vars = { STRIPE_SECRET_KEY = "sk_test_51OgZZ7CKDtg3cmb0ourWQMir8krxZPhwTA99CYkbO8JCP5fD0JthqrkhSttEyCCm43W2Qe6wCWoqTNhyWIfIlOeM00LjKGm2qh" }
+[vars]
+STRIPE_SECRET_KEY = "sk_test_51OgZZ7CKDtg3cmb0ourWQMir8krxZPhwTA99CYkbO8JCP5fD0JthqrkhSttEyCCm43W2Qe6wCWoqTNhyWIfIlOeM00LjKGm2qh"

@@ -33,25 +33,35 @@ export default function ProfileTab() {
 
   const handleCheckout = async () => {
     const stripe = await stripePromise;
-    const response = await fetch("https://stripe-worker.educationaltools-io.workers.dev/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        priceId: "price_1OnCBhCKDtg3cmb0s1CLHaXC",
-        email: user.email,
-      }),
-    });
+    try {
+      const response = await fetch("https://stripe-worker.educationaltools-io.workers.dev/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          priceId: "price_1OnCBhCKDtg3cmb0s1CLHaXC",
+          email: user.email,
+        }),
+      });
 
-    const session = await response.json();
+      const session = await response.json();
 
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+      if (response.status !== 200 || !session.id) {
+        throw new Error("Session ID is missing or invalid.");
+      }
 
-    if (result.error) {
-      console.error(result.error.message);
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.error(result.error.message);
+        alert("There was an error processing your request. Please try again.");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      alert("An unexpected error occurred. Please try again later.");
     }
   };
 
