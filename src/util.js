@@ -27,14 +27,20 @@ export async function checkPaymentStatus() {
   }
 }
 
-export async function updatePaymentStatus(userId, status) {
-  console.log("getting here 1");
+export async function updatePaymentStatus(userId, status, subscriptionId = null) {
   const db = getFirestore();
   const userRef = doc(db, "users", userId);
 
+  console.log(subscriptionId);
+  console.log("Updating payment status to:", status);
+
   try {
-    await setDoc(userRef, { paymentStatus: status }, { merge: true });
-    console.log("Payment status updated successfully");
+    const updateData = { paymentStatus: status };
+    if (subscriptionId) {
+      updateData.subscriptionId = subscriptionId;
+    }
+    await setDoc(userRef, updateData, { merge: true });
+    console.log("Payment status and subscription ID updated successfully");
   } catch (error) {
     console.error("Error updating payment status:", error);
   }

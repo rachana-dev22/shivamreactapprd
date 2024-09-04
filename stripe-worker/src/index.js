@@ -47,7 +47,49 @@ async function handleRequest(request) {
         });
       }
 
-      return new Response(JSON.stringify({ id: session.id }), {
+      // Include the subscription ID in the response
+      return new Response(JSON.stringify({ id: session.id, subscriptionId: session.subscription }), {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+    } catch (error) {
+      console.error("Fetch error:", error);
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
+    }
+  } else if (request.method === "POST" && request.url.endsWith("/cancel-subscription")) {
+    const { subscriptionId } = await request.json();
+
+    try {
+      const response = await fetch(`https://api.stripe.com/v1/subscriptions/${subscriptionId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+
+      const subscription = await response.json();
+
+      if (!response.ok) {
+        console.error("Stripe API error:", subscription);
+        return new Response(JSON.stringify({ error: subscription.error.message }), {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        });
+      }
+
+      return new Response(JSON.stringify({ status: "success" }), {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
