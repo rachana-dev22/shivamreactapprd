@@ -5,22 +5,22 @@ addEventListener("fetch", (event) => {
 async function handleRequest(request) {
   const url = new URL(request.url);
 
-  // Modify the request URL to point to your subdomain instead of the IP address
-  const targetUrl = `https://kasm.edutools.app${url.pathname}`;
+  // Modify the request URL to point to your Azure subdomain
+  const targetUrl = `https://edutools.eastus.cloudapp.azure.com${url.pathname}`;
 
   if (request.method === "OPTIONS") {
     return handleOptions(request);
   }
 
   try {
-    // Forward the request to the target subdomain with HTTPS
+    // Forward the request to the target Azure subdomain with HTTPS
     const response = await fetch(targetUrl, {
       method: request.method,
       headers: request.headers,
       body: request.body,
     });
 
-    // Clone the response and modify headers if necessary
+    // Clone the response and modify headers to allow CORS
     const newResponse = new Response(response.body, response);
     newResponse.headers.set("Access-Control-Allow-Origin", "*");
     newResponse.headers.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
